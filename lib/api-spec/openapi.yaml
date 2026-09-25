@@ -11,6 +11,23 @@ tags:
   - name: health
     description: Health operations
 paths:
+  /inquiries:
+    post:
+      operationId: createInquiry
+      summary: Register interest in AltoCoronel
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InquiryInput"
+      responses:
+        "201":
+          description: Inquiry registered
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InquiryResult"
   /healthz:
     get:
       operationId: healthCheck
@@ -26,6 +43,21 @@ paths:
                 $ref: "#/components/schemas/HealthStatus"
 components:
   schemas:
+    InquiryInput:
+      type: object
+      required: [name, email, phone, channel, consent]
+      properties:
+        name: { type: string, minLength: 2, maxLength: 120 }
+        email: { type: string, format: email, maxLength: 254 }
+        phone: { type: string, minLength: 8, maxLength: 25 }
+        channel: { type: string, enum: [email, whatsapp] }
+        message: { type: string, maxLength: 2000 }
+        consent: { type: boolean, enum: [true] }
+    InquiryResult:
+      type: object
+      required: [message]
+      properties:
+        message: { type: string }
     HealthStatus:
       type: object
       properties:

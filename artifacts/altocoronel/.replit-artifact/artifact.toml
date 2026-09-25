@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "AltoCoronel"
+description = "Sitio inmobiliario de condominio de 51 casas en Coronel, Chile, desde 2.850 UF, con formulario de contacto."
+version = "1.0.0"
+id = "artifacts/altocoronel"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25801
+
+[services.development]
+run = "pnpm --filter @workspace/altocoronel run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/altocoronel", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/altocoronel/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25801"
+BASE_PATH = "/"
