@@ -133,7 +133,7 @@ function Hero() {
   return (
     <section id="inicio" ref={ref} className="relative min-h-[100dvh] overflow-hidden bg-secondary">
       <motion.img src={IMG("hero-alto-coronel.jpg")} alt="Viviendas de AltoCoronel en Coronel" style={{ y, scale, filter: "brightness(1.08)" }}
-        className="absolute inset-0 h-full w-full object-cover object-[center_35%]" data-testid="img-hero" />
+        className="absolute inset-0 h-full w-full object-cover object-top" data-testid="img-hero" />
       <div className="absolute inset-0 bg-gradient-to-t from-[hsl(200_30%_10%/0.68)] via-[hsl(200_30%_10%/0.18)] to-[hsl(200_30%_10%/0.12)]" />
       <div className="relative mx-auto flex min-h-[100dvh] max-w-7xl flex-col justify-end px-5 pb-12 md:px-10 md:pb-16">
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3, duration: 1 }}

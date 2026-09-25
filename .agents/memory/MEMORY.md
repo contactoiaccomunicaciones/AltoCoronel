@@ -1,0 +1,1 @@
+- [Mobile photo orientation](mobile-photo-orientation.md) — Normalize EXIF orientation before editing or using iPhone photos as web assets.
