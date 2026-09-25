@@ -78,11 +78,11 @@
   --elevate-1: rgba(0, 0, 0, 0.03);
   --elevate-2: rgba(0, 0, 0, 0.08);
 
-  --background: 40 38% 95%;
-  --foreground: 200 30% 13%;
+  --background: 30 12% 85%;
+  --foreground: 30 8% 16%;
   --border: 35 20% 82%;
-  --card: 40 45% 97%;
-  --card-foreground: 200 30% 13%;
+  --card: 30 16% 92%;
+  --card-foreground: 30 8% 16%;
   --card-border: 35 20% 84%;
   --sidebar: 40 38% 93%;
   --sidebar-foreground: 200 30% 13%;
@@ -95,26 +95,26 @@
   --popover: 40 45% 97%;
   --popover-foreground: 200 30% 13%;
   --popover-border: 35 20% 82%;
-  --primary: 352 68% 38%;
-  --primary-foreground: 40 45% 97%;
-  --secondary: 196 38% 20%;
+  --primary: 78 57% 44%;
+  --primary-foreground: 30 8% 9%;
+  --secondary: 30 10% 23%;
   --secondary-foreground: 40 45% 95%;
-  --muted: 38 30% 89%;
-  --muted-foreground: 200 12% 38%;
-  --accent: 30 62% 58%;
+  --muted: 30 12% 79%;
+  --muted-foreground: 30 8% 34%;
+  --accent: 78 57% 44%;
   --accent-foreground: 200 30% 13%;
   --destructive: 0 70% 42%;
   --destructive-foreground: 40 45% 97%;
   --input: 35 18% 72%;
-  --ring: 352 68% 38%;
+  --ring: 78 57% 34%;
   --chart-1: 352 68% 38%;
   --chart-2: 196 38% 20%;
   --chart-3: 30 62% 58%;
   --chart-4: 150 20% 40%;
   --chart-5: 40 30% 70%;
 
-  --app-font-sans: 'Bricolage Grotesque', sans-serif;
-  --app-font-serif: 'Fraunces', Georgia, serif;
+  --app-font-sans: 'Century Gothic', 'CenturyGothic', 'URW Gothic', 'Montserrat', sans-serif;
+  --app-font-serif: 'Century Gothic', 'CenturyGothic', 'URW Gothic', 'Montserrat', sans-serif;
   --app-font-mono: Menlo, monospace;
   --radius: 0.25rem; /* 8px */
   --shadow-2xs: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0); /*replace with H S L */
@@ -380,7 +380,8 @@
 html { scroll-behavior: smooth; }
 body::after { content:''; position:fixed; inset:0; pointer-events:none; z-index:60; opacity:.06;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
-.font-display { font-family: var(--app-font-serif); font-optical-sizing: auto; }
+.font-display { font-family: var(--app-font-serif); font-optical-sizing: auto; font-style: normal; }
+.font-display em, .font-display .italic { font-style: normal; }
 @keyframes marquee { from { transform: translateX(0) } to { transform: translateX(-50%) } }
 .marquee { animation: marquee 38s linear infinite; }
 @media (prefers-reduced-motion: reduce) { .marquee { animation: none } html { scroll-behavior:auto } }
