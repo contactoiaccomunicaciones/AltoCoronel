@@ -135,7 +135,6 @@ function Hero() {
       <motion.img src={IMG("hero.jpg")} alt="Imagen referencial de casas en condominio" style={{ y, scale }}
         className="absolute inset-0 h-full w-full object-cover" data-testid="img-hero" />
       <div className="absolute inset-0 bg-gradient-to-t from-[hsl(200_30%_10%/0.9)] via-[hsl(200_30%_10%/0.35)] to-[hsl(200_30%_10%/0.45)]" />
-      <RefTag className="right-5 top-24 md:right-10 md:top-28" />
       <div className="relative mx-auto flex min-h-[100dvh] max-w-7xl flex-col justify-end px-5 pb-12 md:px-10 md:pb-16">
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3, duration: 1 }}
           className="mb-5 flex items-center gap-2 text-xs uppercase tracking-[0.28em] text-[hsl(40_45%_92%/0.85)]">
