@@ -16,9 +16,8 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 const NAV = [
   { id: "proyecto", label: "Proyecto" },
-  { id: "vivir", label: "Vivir aquí" },
-  { id: "coronel", label: "Coronel" },
-  { id: "instagram", label: "Instagram" },
+  { id: "modelos", label: "Modelos y Plantas" },
+  { id: "ubicacion", label: "Ubicación y Entorno" },
   { id: "contacto", label: "Contacto" },
 ];
 
@@ -75,7 +74,7 @@ function PendingDialog({ kind, onClose }: { kind: Pending; onClose: () => void }
   );
 }
 
-function Nav({ onPending }: { onPending: (k: Pending) => void }) {
+function Nav() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
@@ -122,10 +121,6 @@ function Nav({ onPending }: { onPending: (k: Pending) => void }) {
                 {n.label}
               </motion.a>
             ))}
-            <button onClick={() => { setOpen(false); if (instagramReady) window.open(CONTACT.instagramUrl, "_blank", "noopener"); else onPending("instagram"); }}
-              data-testid="button-mobile-instagram" className="mt-8 flex items-center gap-2 text-sm text-muted-foreground">
-              <SiInstagram /> Instagram
-            </button>
           </motion.div>
         )}
       </AnimatePresence>
@@ -234,12 +229,12 @@ function Proyecto() {
 
 function Vivir() {
   return (
-    <section id="vivir" className="bg-secondary py-24 text-secondary-foreground md:py-36">
+    <section id="modelos" className="bg-secondary py-24 text-secondary-foreground md:py-36">
       <div className="mx-auto max-w-7xl px-5 md:px-10">
-        <Reveal><Eyebrow n="02" light>Vivir aquí</Eyebrow></Reveal>
+        <Reveal><Eyebrow n="02" light>Modelos y Plantas</Eyebrow></Reveal>
         <Reveal delay={0.1}>
           <h2 className="mt-8 max-w-3xl font-display text-4xl font-light leading-[1.05] md:text-6xl">
-            La casa es el comienzo. <em className="text-accent">Lo que pasa adentro</em> es de ustedes.
+            Tu próxima casa, <em className="text-accent">en detalle.</em>
           </h2>
         </Reveal>
         <div className="mt-16 grid gap-5 md:grid-cols-12 md:grid-rows-[auto_auto]">
@@ -255,11 +250,12 @@ function Vivir() {
           </Reveal>
           <Reveal delay={0.2} className="flex flex-col justify-between gap-8 rounded-sm border border-[hsl(40_45%_95%/0.15)] p-8 md:col-span-5">
             <p className="font-display text-2xl font-light leading-snug md:text-3xl">
-              "Un hogar no se mide solo en metros. Se mide en las mañanas tranquilas y en las tardes que vuelven a juntarnos."
+              Próximamente: modelos, plantas y superficies oficiales del proyecto.
             </p>
             <p className="text-sm text-[hsl(40_45%_95%/0.6)]">
-              Imágenes con fines ilustrativos. No corresponden a renders ni a terminaciones del proyecto.
+              Los planos aún no están publicados. Solicita información al equipo comercial. Las imágenes son referenciales y no corresponden a modelos ni terminaciones oficiales.
             </p>
+            <a href="#contacto" className="text-accent underline underline-offset-4">Consultar modelos y plantas</a>
           </Reveal>
         </div>
       </div>
@@ -269,10 +265,10 @@ function Vivir() {
 
 function Coronel() {
   return (
-    <section id="coronel" className="relative overflow-hidden py-24 md:py-36">
+    <section id="ubicacion" className="relative overflow-hidden py-24 md:py-36">
       <div className="mx-auto grid max-w-7xl gap-14 px-5 md:grid-cols-12 md:px-10">
         <div className="md:col-span-5">
-          <Reveal><Eyebrow n="03">Ubicación</Eyebrow></Reveal>
+          <Reveal><Eyebrow n="03">Ubicación y Entorno</Eyebrow></Reveal>
           <Reveal delay={0.1}>
             <h2 className="mt-8 font-display text-6xl font-light leading-none md:text-8xl">Coronel<span className="text-primary">.</span></h2>
           </Reveal>
@@ -301,44 +297,6 @@ function Coronel() {
             <text x="300" y="132" className="fill-current" fontSize="9" opacity=".5" letterSpacing="2">BIOBÍO</text>
           </svg>
         </Reveal>
-      </div>
-    </section>
-  );
-}
-
-function Instagram({ onPending }: { onPending: (k: Pending) => void }) {
-  const go = () => (instagramReady ? window.open(CONTACT.instagramUrl, "_blank", "noopener,noreferrer") : onPending("instagram"));
-  return (
-    <section id="instagram" className="border-y border-border bg-muted py-24 md:py-32">
-      <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 md:grid-cols-2 md:px-10">
-        <div>
-          <Reveal><Eyebrow n="04">Instagram</Eyebrow></Reveal>
-          <Reveal delay={0.1}>
-            <h2 className="mt-8 font-display text-4xl font-light leading-tight md:text-5xl">
-              Sigue el avance de AltoCoronel <em className="text-primary">de cerca.</em>
-            </h2>
-            <p className="mt-6 max-w-md text-muted-foreground">
-              {instagramReady ? `Novedades del proyecto en ${instagramHandle}.` : "Nuestra cuenta oficial se publicará pronto en este espacio."}
-            </p>
-            <button onClick={go} data-testid="button-instagram"
-              className="group mt-8 inline-flex items-center gap-3 rounded-sm border border-foreground px-6 py-3.5 transition hover:bg-foreground hover:text-background">
-              <SiInstagram className="h-4 w-4" /> {instagramReady ? instagramHandle : "Ver Instagram"} <ArrowUpRight className="h-4 w-4" />
-            </button>
-          </Reveal>
-        </div>
-        <div className="grid grid-cols-3 gap-3">
-          {["hero.jpg", "facade.jpg", "interior.jpg", "street.jpg", "hero.jpg", "facade.jpg"].map((s, i) => (
-            <Reveal key={i} delay={i * 0.06}>
-              <button onClick={go} className="group relative block aspect-square w-full overflow-hidden rounded-sm" data-testid={`button-ig-tile-${i}`}>
-                <img src={IMG(s)} alt="Imagen referencial" className={`h-full w-full object-cover transition duration-700 group-hover:scale-110 ${i % 2 ? "object-left" : "object-right"}`} />
-                <span className="absolute inset-0 flex items-center justify-center bg-primary/0 transition group-hover:bg-primary/60">
-                  <SiInstagram className="h-6 w-6 text-primary-foreground opacity-0 transition group-hover:opacity-100" />
-                </span>
-              </button>
-            </Reveal>
-          ))}
-          <p className="col-span-3 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Imágenes referenciales</p>
-        </div>
       </div>
     </section>
   );
@@ -377,7 +335,7 @@ function Contacto({ onPending, onPrivacy }: { onPending: (k: Pending) => void; o
     <section id="contacto" className="relative bg-background py-24 md:py-36">
       <div className="mx-auto grid max-w-7xl gap-16 px-5 md:grid-cols-12 md:px-10">
         <div className="md:col-span-5">
-          <Reveal><Eyebrow n="05">Contacto</Eyebrow></Reveal>
+          <Reveal><Eyebrow n="04">Contacto</Eyebrow></Reveal>
           <Reveal delay={0.1}>
             <h2 className="mt-8 font-display text-5xl font-light leading-[1] md:text-7xl">
               Conversemos sobre <em className="text-primary">tu próxima casa.</em>
@@ -395,6 +353,10 @@ function Contacto({ onPending, onPrivacy }: { onPending: (k: Pending) => void; o
             <button onClick={() => (whatsappReady ? window.open(whatsappLink(), "_blank", "noopener,noreferrer") : onPending("whatsapp"))}
               data-testid="button-whatsapp" className="flex items-center gap-3 text-foreground hover:text-primary">
               <SiWhatsapp className="h-4 w-4" /> Escribir por WhatsApp
+            </button>
+            <button onClick={() => (instagramReady ? window.open(CONTACT.instagramUrl, "_blank", "noopener,noreferrer") : onPending("instagram"))}
+              data-testid="button-contact-instagram" className="flex items-center gap-3 text-foreground hover:text-primary">
+              <SiInstagram className="h-4 w-4" /> {instagramReady ? instagramHandle : "Instagram"}
             </button>
           </Reveal>
         </div>
@@ -539,14 +501,13 @@ export default function Home() {
   const [privacy, setPrivacy] = useState(false);
   return (
     <div className="min-h-[100dvh] overflow-x-hidden">
-      <Nav onPending={setPending} />
+      <Nav />
       <main>
         <Hero />
         <Marquee />
         <Proyecto />
         <Vivir />
         <Coronel />
-        <Instagram onPending={setPending} />
         <Contacto onPending={setPending} onPrivacy={() => setPrivacy(true)} />
       </main>
       <Footer onPending={setPending} onPrivacy={() => setPrivacy(true)} />
