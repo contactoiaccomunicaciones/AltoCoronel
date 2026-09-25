@@ -255,25 +255,31 @@ function Coronel() {
               Comuna costera de la Región del Biobío, al sur de Concepción. Entre el Pacífico y los cerros, una ciudad con historia propia
               y ritmo de barrio.
             </p>
-            <div className="mt-8 rounded-sm border border-dashed border-input p-5 text-sm leading-relaxed text-muted-foreground" data-testid="text-location-note">
-              <strong className="font-medium text-foreground">Dirección exacta:</strong> será informada por el equipo comercial. Registra tu interés para recibirla.
+            <div className="mt-8 rounded-sm border border-input bg-card p-5 text-sm leading-relaxed text-muted-foreground" data-testid="text-location-note">
+              <strong className="font-medium text-foreground">Visítanos en:</strong> Dos Oriente 348, Coronel.
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Dos+Oriente+348%2C+Coronel%2C+Chile"
+                target="_blank"
+                rel="noreferrer"
+                className="mt-3 inline-block text-foreground underline underline-offset-4 hover:text-primary"
+              >
+                Abrir en Google Maps
+              </a>
             </div>
           </Reveal>
         </div>
         <Reveal delay={0.1} className="relative md:col-span-7">
-          <div className="relative overflow-hidden rounded-sm">
-            <RefTag className="left-4 top-4" />
-            <img src={IMG("street.jpg")} alt="Imagen referencial de calle interior de condominio" className="aspect-[4/3] w-full object-cover" data-testid="img-street" />
+          <div className="overflow-hidden rounded-sm border border-border bg-muted">
+            <iframe
+              src="https://www.google.com/maps?q=Dos+Oriente+348%2C+Coronel%2C+Chile&z=16&output=embed"
+              title="Mapa de AltoCoronel en Dos Oriente 348, Coronel"
+              className="aspect-[4/3] w-full"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+              data-testid="map-location"
+            />
           </div>
-          <svg viewBox="0 0 400 140" className="mt-6 w-full text-foreground" aria-hidden>
-            <motion.path d="M10 110 C 80 30, 160 120, 230 60 S 360 40, 390 20" fill="none" stroke="currentColor" strokeOpacity=".25" strokeWidth="1"
-              initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 2.2, ease }} />
-            <circle cx="230" cy="60" r="6" className="fill-primary" />
-            <circle cx="230" cy="60" r="14" className="fill-primary" fillOpacity=".15" />
-            <text x="244" y="56" className="fill-current font-display" fontSize="14" fontStyle="italic">Coronel</text>
-            <text x="10" y="132" className="fill-current" fontSize="9" opacity=".5" letterSpacing="2">OCÉANO PACÍFICO</text>
-            <text x="300" y="132" className="fill-current" fontSize="9" opacity=".5" letterSpacing="2">BIOBÍO</text>
-          </svg>
         </Reveal>
       </div>
     </section>
