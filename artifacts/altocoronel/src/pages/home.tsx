@@ -101,9 +101,6 @@ function Nav() {
           ))}
         </nav>
         <div className="flex items-center gap-2">
-          <a href="#contacto" data-testid="button-nav-cta" className="hidden rounded-sm bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition hover:brightness-110 sm:inline-flex">
-            Quiero información
-          </a>
           <button onClick={() => setOpen(!open)} aria-label="Abrir menú" data-testid="button-menu"
             className={`flex h-10 w-10 items-center justify-center md:hidden ${solid ? "text-foreground" : "text-[hsl(40_45%_96%)]"}`}>
             {open ? <X /> : <Menu />}
@@ -144,11 +141,10 @@ function Hero() {
           className="mb-5 flex items-center gap-2 text-xs uppercase tracking-[0.28em] text-[hsl(40_45%_92%/0.85)]">
           <MapPin className="h-3.5 w-3.5" /> Coronel, Región del Biobío
         </motion.p>
-        <h1 className="font-display text-[clamp(3rem,10vw,9rem)] font-light leading-[0.9] tracking-tight text-[hsl(40_45%_96%)]">
-          {["Un lugar", "para quedarse."].map((l, i) => (
+        <h1 className="font-display text-[clamp(2.65rem,6vw,6.25rem)] font-light leading-[0.95] tracking-tight text-[hsl(40_45%_96%)]">
+          {["En Coronel,", "se puede llegar", "aún más alto."].map((l) => (
             <span key={l} className="block overflow-hidden pb-2">
-              <motion.span className={`block ${i === 1 ? "italic" : ""}`} initial={{ y: "110%" }} animate={{ y: 0 }}
-                transition={{ delay: 0.4 + i * 0.15, duration: 1.1, ease }}>{l}</motion.span>
+              <span className="block">{l}</span>
             </span>
           ))}
         </h1>
