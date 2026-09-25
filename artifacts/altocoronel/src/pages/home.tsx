@@ -252,8 +252,7 @@ function Coronel() {
           </Reveal>
           <Reveal delay={0.2}>
             <p className="mt-8 text-lg leading-relaxed text-muted-foreground">
-              Comuna costera de la Región del Biobío, al sur de Concepción. Entre el Pacífico y los cerros, una ciudad con historia propia
-              y ritmo de barrio.
+              Vive en un entorno privilegiado de la comuna, a pasos de servicios tales como colegios, estación de servicio COPEC, supermercado Líder, estación Biotren Huinca, entre otros.
             </p>
             <div className="mt-8 rounded-sm border border-input bg-card p-5 text-sm leading-relaxed text-muted-foreground" data-testid="text-location-note">
               <strong className="font-medium text-foreground">Visítanos en:</strong> Dos Oriente 348, Coronel.
