@@ -183,11 +183,10 @@ function Proyecto() {
         </Reveal>
         <Reveal delay={0.15} className="md:col-span-4 md:col-start-9 md:pt-4">
           <p className="text-lg leading-relaxed text-muted-foreground">
-            AltoCoronel es un condominio de 51 casas en Coronel. Un proyecto con los pies en la tierra, para familias que quieren dar
-            el siguiente paso sin perder de vista lo importante.
+            AltoCoronel es un condominio de 51 casas en Coronel. Un proyecto pensado en ti y en tu familia.
           </p>
           <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
-            Los detalles de superficies, programas y etapas se entregarán directamente por el equipo comercial a quienes registren su interés.
+            El condominio cuenta con áreas verdes y seguridad y acceso controlado 24/7.
           </p>
         </Reveal>
       </div>
