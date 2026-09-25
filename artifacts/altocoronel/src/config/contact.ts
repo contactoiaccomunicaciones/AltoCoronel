@@ -6,11 +6,11 @@
  */
 export const CONTACT = {
   /** URL completa del perfil oficial, ej: "https://www.instagram.com/usuario" */
-  instagramUrl: "",
+  instagramUrl: "https://www.instagram.com/altocoronel/",
   /** Correo comercial oficial */
-  email: "",
+  email: "aemunoz.y@gmail.com",
   /** Número WhatsApp en formato internacional sin "+" ni espacios, ej: "56912345678" */
-  whatsappNumber: "",
+  whatsappNumber: "56957694999",
 };
 
 export const instagramReady = /^https:\/\/(www\.)?instagram\.com\/[A-Za-z0-9_.]+\/?$/.test(CONTACT.instagramUrl);
