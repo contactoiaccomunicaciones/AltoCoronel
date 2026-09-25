@@ -178,7 +178,7 @@ function Proyecto() {
       <div className="mt-10 grid gap-12 md:grid-cols-12">
         <Reveal className="md:col-span-7">
           <h2 className="font-display text-4xl font-light leading-[1.05] md:text-6xl">
-            No buscamos impresionar. Buscamos que <em className="text-primary">llegar a casa</em> se sienta bien.
+            Vive junto a tu familia la tranquilidad y seguridad que mereces.
           </h2>
         </Reveal>
         <Reveal delay={0.15} className="md:col-span-4 md:col-start-9 md:pt-4">
