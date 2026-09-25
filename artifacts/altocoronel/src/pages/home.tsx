@@ -167,22 +167,6 @@ function Hero() {
   );
 }
 
-function Marquee() {
-  const items = ["51 casas", "Condominio", "Coronel", "Desde 2.850 UF", "Para familias"];
-  const row = [...items, ...items, ...items, ...items];
-  return (
-    <div className="overflow-hidden border-b border-border bg-primary py-4 text-primary-foreground">
-      <div className="marquee flex w-max gap-10 whitespace-nowrap">
-        {row.map((t, i) => (
-          <span key={i} className="flex items-center gap-10 font-display text-2xl italic">
-            {t}<span className="h-1.5 w-1.5 rounded-full bg-accent" />
-          </span>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 function Proyecto() {
   const facts = [
     { k: "51", l: "casas", d: "Una escala acotada, donde es posible conocer a los vecinos." },
@@ -500,7 +484,6 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
-        <Marquee />
         <Proyecto />
         <Vivir />
         <Coronel />
