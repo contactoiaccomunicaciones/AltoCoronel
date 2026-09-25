@@ -89,7 +89,8 @@ function Nav({ onPending }: { onPending: (k: Pending) => void }) {
     <header className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${solid ? "bg-background/90 backdrop-blur-md border-b border-border" : "bg-transparent"}`}>
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 md:h-20 md:px-10">
         <a href="#inicio" data-testid="link-logo" className={`flex items-baseline gap-1 font-display text-2xl transition-colors ${solid ? "text-foreground" : "text-[hsl(40_45%_96%)]"}`}>
-          Alto<span className="italic text-primary">Coronel</span>
+          <img src={`${import.meta.env.BASE_URL}images/miro-logo.png`} alt="Miró Inmobiliaria" className="h-14 w-14 self-center rounded-sm object-contain bg-white mr-2" />
+          <span className="self-center text-lg sm:text-xl">Alto<span className="text-primary">Coronel</span></span>
         </a>
         <nav className="hidden items-center gap-8 md:flex">
           {NAV.map((n) => (
@@ -508,6 +509,7 @@ function Footer({ onPending, onPrivacy }: { onPending: (k: Pending) => void; onP
   return (
     <footer className="bg-secondary text-secondary-foreground">
       <div className="mx-auto max-w-7xl px-5 pb-10 pt-20 md:px-10">
+        <img src={`${import.meta.env.BASE_URL}images/miro-logo.png`} alt="Miró Inmobiliaria" className="mb-8 h-28 w-28 rounded-sm bg-white object-contain" />
         <div className="font-display text-[clamp(3.5rem,14vw,12rem)] font-light leading-none tracking-tight">
           Alto<em className="text-primary">Coronel</em>
         </div>
