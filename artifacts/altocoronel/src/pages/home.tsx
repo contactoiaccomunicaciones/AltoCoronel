@@ -168,8 +168,8 @@ function Hero() {
 
 function Proyecto() {
   const facts = [
-    { k: "51", l: "casas", d: "Una escala acotada, donde es posible conocer a los vecinos." },
-    { k: "1", l: "condominio", d: "Un conjunto residencial pensado como comunidad." },
+    { k: "51", l: "casas" },
+    { k: "1", l: "condominio" },
     { k: "2.850", l: "UF desde", d: "Precio inicial referencial del proyecto." },
   ];
   return (
@@ -198,7 +198,7 @@ function Proyecto() {
               <span className="font-display text-7xl font-light text-foreground md:text-8xl">{f.k}</span>
               <span className="font-display text-xl italic text-primary">{f.l}</span>
             </div>
-            <p className="mt-4 max-w-xs text-muted-foreground">{f.d}</p>
+            {f.d && <p className="mt-4 max-w-xs text-muted-foreground">{f.d}</p>}
           </Reveal>
         ))}
       </div>
