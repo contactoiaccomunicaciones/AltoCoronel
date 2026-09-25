@@ -151,7 +151,7 @@ function Hero() {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1, duration: 0.9, ease }}
           className="mt-10 grid gap-8 border-t border-[hsl(40_45%_96%/0.25)] pt-8 md:grid-cols-[1fr_auto_auto] md:items-end">
           <p className="max-w-md text-lg leading-relaxed text-[hsl(40_45%_94%/0.88)]">
-            51 casas en condominio en Coronel. Un proyecto pensado para familias que buscan su próximo hogar.
+            Vive junto a tu familia en AltoCoronel, un condominio de 51 casas ubicado en el corazón del barrio más seguro de la comuna.
           </p>
           <div className="text-[hsl(40_45%_96%)]" data-testid="text-hero-price">
             <div className="text-xs uppercase tracking-[0.22em] opacity-70">Desde</div>
