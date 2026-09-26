@@ -217,25 +217,21 @@ function Vivir() {
           </h2>
         </Reveal>
         <div className="mt-16 grid gap-5 md:grid-cols-3">
-          <Reveal className="relative flex h-[38vh] items-center justify-center overflow-hidden rounded-sm bg-[hsl(200_25%_8%)] md:h-[45vh]">
-            <RefTag className="left-4 top-4" />
-            <motion.img whileHover={{ scale: 1.04 }} transition={{ duration: 1.2, ease }} src={IMG("interior.jpg")}
-              alt="Imagen referencial de interior" className="h-full w-full object-contain" data-testid="img-interior" />
+          <Reveal className="relative aspect-[16/10] overflow-hidden rounded-sm bg-white">
+            <img src={IMG("planta-nivel-1.png")}
+              alt="Plano y distribución del primer nivel de AltoCoronel" className="h-full w-full object-contain" data-testid="img-plan-level-1" />
           </Reveal>
-          <Reveal delay={0.1} className="relative flex h-[38vh] items-center justify-center overflow-hidden rounded-sm bg-[hsl(200_25%_8%)] md:h-[45vh]">
-            <RefTag className="left-4 top-4" />
-            <motion.img whileHover={{ scale: 1.04 }} transition={{ duration: 1.2, ease }} src={IMG("facade.jpg")}
-              alt="Imagen referencial de fachada" className="h-full w-full object-contain" data-testid="img-facade" />
+          <Reveal delay={0.1} className="relative aspect-[16/10] overflow-hidden rounded-sm bg-white">
+            <img src={IMG("planta-nivel-2.png")}
+              alt="Plano y distribución del segundo nivel de AltoCoronel" className="h-full w-full object-contain" data-testid="img-plan-level-2" />
           </Reveal>
-          <Reveal delay={0.2} className="relative flex h-[38vh] items-center justify-center overflow-hidden rounded-sm bg-[hsl(200_25%_8%)] md:h-[45vh]">
-            <RefTag className="left-4 top-4" />
-            <motion.img whileHover={{ scale: 1.04 }} transition={{ duration: 1.2, ease }} src={IMG("street.jpg")}
-              alt="Imagen referencial de calle interior de condominio" className="h-full w-full object-contain" data-testid="img-street" />
+          <Reveal delay={0.2} className="relative aspect-[16/10] overflow-hidden rounded-sm bg-white">
+            <img src={IMG("planta-nivel-3.png")}
+              alt="Plano de la posible habilitación del tercer nivel de AltoCoronel" className="h-full w-full object-contain" data-testid="img-plan-level-3" />
           </Reveal>
-          <Reveal delay={0.3} className="relative overflow-hidden rounded-sm md:col-span-3">
-            <RefTag className="left-4 top-4" />
-            <motion.img whileHover={{ scale: 1.04 }} transition={{ duration: 1.2, ease }} src={IMG("hero.jpg")}
-              alt="Imagen referencial de casas en condominio" className="aspect-[16/7] w-full object-cover" data-testid="img-collage-wide" />
+          <Reveal delay={0.3} className="relative overflow-hidden rounded-sm bg-white md:col-span-3">
+            <img src={IMG("plano-conjunto.png")}
+              alt="Plano general de distribución del condominio AltoCoronel" className="aspect-[16/7] w-full object-contain" data-testid="img-collage-wide" />
           </Reveal>
         </div>
         <Reveal delay={0.35}>
