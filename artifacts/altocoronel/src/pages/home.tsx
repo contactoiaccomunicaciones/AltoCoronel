@@ -220,18 +220,22 @@ function Vivir() {
           <Reveal className="relative aspect-[16/10] overflow-hidden rounded-sm bg-white">
             <img src={IMG("planta-nivel-1.png")}
               alt="Plano y distribución del primer nivel de AltoCoronel" className="h-full w-full object-contain" data-testid="img-plan-level-1" />
+            <span className="absolute right-3 top-3 rounded-sm bg-secondary/95 px-3 py-2 font-display text-sm font-medium text-secondary-foreground shadow-sm md:text-base" data-testid="banner-floor-1">1er piso</span>
           </Reveal>
           <Reveal delay={0.1} className="relative aspect-[16/10] overflow-hidden rounded-sm bg-white">
             <img src={IMG("planta-nivel-2.png")}
               alt="Plano y distribución del segundo nivel de AltoCoronel" className="h-full w-full object-contain" data-testid="img-plan-level-2" />
+            <span className="absolute right-3 top-3 rounded-sm bg-secondary/95 px-3 py-2 font-display text-sm font-medium text-secondary-foreground shadow-sm md:text-base" data-testid="banner-floor-2">2do piso</span>
           </Reveal>
           <Reveal delay={0.2} className="relative aspect-[16/10] overflow-hidden rounded-sm bg-white">
             <img src={IMG("planta-nivel-3.png")}
               alt="Plano de la posible habilitación del tercer nivel de AltoCoronel" className="h-full w-full object-contain" data-testid="img-plan-level-3" />
+            <span className="absolute right-3 top-3 rounded-sm bg-secondary/95 px-3 py-2 font-display text-sm font-medium text-secondary-foreground shadow-sm md:text-base" data-testid="banner-floor-3">mansarda</span>
           </Reveal>
           <Reveal delay={0.3} className="relative overflow-hidden rounded-sm bg-white md:col-span-3">
             <img src={IMG("plano-conjunto.png")}
               alt="Plano general de distribución del condominio AltoCoronel" className="aspect-[16/7] w-full object-contain" data-testid="img-collage-wide" />
+            <span className="absolute right-3 top-3 rounded-sm bg-secondary/95 px-3 py-2 font-display text-sm font-medium text-secondary-foreground shadow-sm md:text-base" data-testid="banner-condominio">condominio</span>
           </Reveal>
         </div>
         <Reveal delay={0.35}>
