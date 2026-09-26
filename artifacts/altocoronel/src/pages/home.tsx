@@ -233,16 +233,11 @@ function Vivir() {
             <span className="absolute right-3 top-3 rounded-sm bg-secondary/95 px-3 py-2 font-display text-sm font-medium text-secondary-foreground shadow-sm md:text-base" data-testid="banner-floor-3">mansarda</span>
           </Reveal>
           <Reveal delay={0.3} className="overflow-hidden rounded-sm bg-white md:col-span-3">
-            <a href={IMG("plano-conjunto-mejorado.png")} target="_blank" rel="noopener noreferrer"
-              aria-label="Abrir plano general del condominio en tamaño completo"
-              className="group block focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent">
-              <img src={IMG("plano-conjunto-mejorado.png")}
-                alt="Plano general de distribución del condominio AltoCoronel" className="block h-auto w-full" data-testid="img-collage-wide" />
-              <span className="flex items-center justify-between bg-secondary px-4 py-3 text-secondary-foreground">
-                <span className="font-display text-sm font-medium md:text-base" data-testid="banner-condominio">condominio</span>
-                <span className="text-xs group-hover:text-accent md:text-sm">Ver plano en grande ↗</span>
-              </span>
-            </a>
+            <img src={IMG("plano-conjunto-mejorado.png")}
+              alt="Plano general de distribución del condominio AltoCoronel" className="block h-auto w-full" data-testid="img-collage-wide" />
+            <span className="absolute right-3 top-3 rounded-sm bg-secondary/95 px-3 py-2 font-display text-sm font-medium text-secondary-foreground shadow-sm md:text-base" data-testid="banner-condominio">
+              condominio
+            </span>
           </Reveal>
         </div>
         <Reveal delay={0.35}>
