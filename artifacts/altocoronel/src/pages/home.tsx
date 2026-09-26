@@ -170,7 +170,7 @@ function Hero() {
 function Proyecto() {
   const facts = [
     { k: "51", l: "casas" },
-    { k: "1", l: "condominio" },
+    { k: "24/7", l: "seguridad" },
     { k: "2.850", l: "UF desde", d: "Precio inicial referencial del proyecto." },
   ];
   return (
