@@ -217,20 +217,20 @@ function Vivir() {
           </h2>
         </Reveal>
         <div className="mt-16 grid gap-5 md:grid-cols-3">
-          <Reveal className="relative overflow-hidden rounded-sm">
+          <Reveal className="relative flex h-[38vh] items-center justify-center overflow-hidden rounded-sm bg-[hsl(200_25%_8%)] md:h-[45vh]">
             <RefTag className="left-4 top-4" />
             <motion.img whileHover={{ scale: 1.04 }} transition={{ duration: 1.2, ease }} src={IMG("interior.jpg")}
-              alt="Imagen referencial de interior" className="aspect-[4/5] w-full object-cover" data-testid="img-interior" />
+              alt="Imagen referencial de interior" className="h-full w-full object-contain" data-testid="img-interior" />
           </Reveal>
-          <Reveal delay={0.1} className="relative overflow-hidden rounded-sm">
+          <Reveal delay={0.1} className="relative flex h-[38vh] items-center justify-center overflow-hidden rounded-sm bg-[hsl(200_25%_8%)] md:h-[45vh]">
             <RefTag className="left-4 top-4" />
             <motion.img whileHover={{ scale: 1.04 }} transition={{ duration: 1.2, ease }} src={IMG("facade.jpg")}
-              alt="Imagen referencial de fachada" className="aspect-[4/5] w-full object-cover" data-testid="img-facade" />
+              alt="Imagen referencial de fachada" className="h-full w-full object-contain" data-testid="img-facade" />
           </Reveal>
-          <Reveal delay={0.2} className="relative overflow-hidden rounded-sm">
+          <Reveal delay={0.2} className="relative flex h-[38vh] items-center justify-center overflow-hidden rounded-sm bg-[hsl(200_25%_8%)] md:h-[45vh]">
             <RefTag className="left-4 top-4" />
             <motion.img whileHover={{ scale: 1.04 }} transition={{ duration: 1.2, ease }} src={IMG("street.jpg")}
-              alt="Imagen referencial de calle interior de condominio" className="aspect-[4/5] w-full object-cover" data-testid="img-street" />
+              alt="Imagen referencial de calle interior de condominio" className="h-full w-full object-contain" data-testid="img-street" />
           </Reveal>
           <Reveal delay={0.3} className="relative overflow-hidden rounded-sm md:col-span-3">
             <RefTag className="left-4 top-4" />
