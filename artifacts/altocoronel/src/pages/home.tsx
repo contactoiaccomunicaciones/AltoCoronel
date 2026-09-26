@@ -210,33 +210,39 @@ function Vivir() {
   return (
     <section id="modelos" className="bg-secondary py-24 text-secondary-foreground md:py-36">
       <div className="mx-auto max-w-7xl px-5 md:px-10">
-        <Reveal><Eyebrow n="02" light>Modelos y Plantas</Eyebrow></Reveal>
+        <Reveal><Eyebrow n="02" light>Plantas</Eyebrow></Reveal>
         <Reveal delay={0.1}>
           <h2 className="mt-8 max-w-3xl font-display text-4xl font-light leading-[1.05] md:text-6xl">
             Tu próxima casa, <em className="text-accent">en detalle.</em>
           </h2>
         </Reveal>
-        <div className="mt-16 grid gap-5 md:grid-cols-12 md:grid-rows-[auto_auto]">
-          <Reveal className="relative overflow-hidden rounded-sm md:col-span-7 md:row-span-2">
+        <div className="mt-16 grid gap-5 md:grid-cols-3">
+          <Reveal className="relative overflow-hidden rounded-sm">
             <RefTag className="left-4 top-4" />
             <motion.img whileHover={{ scale: 1.04 }} transition={{ duration: 1.2, ease }} src={IMG("interior.jpg")}
-              alt="Imagen referencial de interior" className="aspect-[4/5] h-full w-full object-cover md:aspect-auto" data-testid="img-interior" />
+              alt="Imagen referencial de interior" className="aspect-[4/5] w-full object-cover" data-testid="img-interior" />
           </Reveal>
-          <Reveal delay={0.1} className="relative overflow-hidden rounded-sm md:col-span-5">
+          <Reveal delay={0.1} className="relative overflow-hidden rounded-sm">
             <RefTag className="left-4 top-4" />
             <motion.img whileHover={{ scale: 1.04 }} transition={{ duration: 1.2, ease }} src={IMG("facade.jpg")}
-              alt="Imagen referencial de fachada" className="aspect-[4/3] w-full object-cover" data-testid="img-facade" />
+              alt="Imagen referencial de fachada" className="aspect-[4/5] w-full object-cover" data-testid="img-facade" />
           </Reveal>
-          <Reveal delay={0.2} className="flex flex-col justify-between gap-8 rounded-sm border border-[hsl(40_45%_95%/0.15)] p-8 md:col-span-5">
-            <p className="font-display text-2xl font-light leading-snug md:text-3xl">
-              Próximamente: modelos, plantas y superficies oficiales del proyecto.
-            </p>
-            <p className="text-sm text-[hsl(40_45%_95%/0.6)]">
-              Los planos aún no están publicados. Solicita información al equipo comercial. Las imágenes son referenciales y no corresponden a modelos ni terminaciones oficiales.
-            </p>
-            <a href="#contacto" className="text-accent underline underline-offset-4">Consultar modelos y plantas</a>
+          <Reveal delay={0.2} className="relative overflow-hidden rounded-sm">
+            <RefTag className="left-4 top-4" />
+            <motion.img whileHover={{ scale: 1.04 }} transition={{ duration: 1.2, ease }} src={IMG("street.jpg")}
+              alt="Imagen referencial de calle interior de condominio" className="aspect-[4/5] w-full object-cover" data-testid="img-street" />
+          </Reveal>
+          <Reveal delay={0.3} className="relative overflow-hidden rounded-sm md:col-span-3">
+            <RefTag className="left-4 top-4" />
+            <motion.img whileHover={{ scale: 1.04 }} transition={{ duration: 1.2, ease }} src={IMG("hero.jpg")}
+              alt="Imagen referencial de casas en condominio" className="aspect-[16/7] w-full object-cover" data-testid="img-collage-wide" />
           </Reveal>
         </div>
+        <Reveal delay={0.35}>
+          <p className="mt-10 max-w-3xl font-display text-2xl font-light leading-snug text-[hsl(40_45%_96%)] md:text-3xl" data-testid="text-plantas-specs">
+            Casas de 72,55 metros cuadrados, con cocina amoblada y equipada, distribuidos en 2 niveles con posibilidad de habilitación de un tercer nivel.
+          </p>
+        </Reveal>
       </div>
     </section>
   );
