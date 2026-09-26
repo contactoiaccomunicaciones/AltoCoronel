@@ -134,13 +134,14 @@ function Hero() {
     <section id="inicio" ref={ref} className="relative min-h-[100dvh] overflow-hidden bg-secondary">
       <motion.img src={IMG("hero-alto-coronel.jpg")} alt="Viviendas de AltoCoronel en Coronel" style={{ y, scale, filter: "brightness(1.08)" }}
         className="absolute inset-0 h-full w-full object-cover object-top" data-testid="img-hero" />
-      <div className="absolute inset-0 bg-gradient-to-t from-[hsl(200_30%_10%/0.68)] via-[hsl(200_30%_10%/0.18)] to-[hsl(200_30%_10%/0.12)]" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[hsl(200_30%_6%/0.92)] via-[hsl(200_30%_8%/0.55)] to-[hsl(200_30%_10%/0.15)]" />
+      <div className="absolute inset-x-0 bottom-0 h-[55%] bg-gradient-to-t from-[hsl(200_30%_4%/0.65)] to-transparent" />
       <div className="relative mx-auto flex min-h-[100dvh] max-w-7xl flex-col justify-end px-5 pb-12 md:px-10 md:pb-16">
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3, duration: 1 }}
           className="mb-5 flex items-center gap-2 text-xs uppercase tracking-[0.28em] text-[hsl(40_45%_92%/0.85)]">
           <MapPin className="h-3.5 w-3.5" /> Coronel, Región del Biobío
         </motion.p>
-        <h1 className="font-display text-[clamp(2.65rem,6vw,6.25rem)] font-light leading-[0.95] tracking-tight text-[hsl(40_45%_96%)]">
+        <h1 className="font-display text-[clamp(2.65rem,6vw,6.25rem)] font-light leading-[0.95] tracking-tight text-[hsl(40_45%_98%)] [text-shadow:0_2px_24px_hsl(200_30%_4%/0.55)]">
           {["En Coronel,", "se puede llegar", "aún más alto."].map((l) => (
             <span key={l} className="block overflow-hidden pb-2">
               <span className="block">{l}</span>
