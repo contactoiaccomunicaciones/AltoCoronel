@@ -259,7 +259,7 @@ function Interiores() {
               Un lugar para <em className="text-primary">estar juntos.</em>
             </h2>
             <p className="mt-8 max-w-sm text-lg leading-relaxed text-muted-foreground">
-              Conversar, compartir y hacer espacio para los momentos de todos los días. Imagina tu vida en familia en AltoCoronel.
+              Nuestras casas vienen con cocina amoblada y equipada, y dormitorios y baños amoblados. Además, en AltoCoronel contamos con ventanas termopanel en dormitorios y sistema aislación EIFS (aislapol de alta densidad).
             </p>
           </Reveal>
           <Reveal delay={0.15} className="relative md:col-span-8">
