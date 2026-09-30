@@ -9,6 +9,91 @@ import * as zod from 'zod';
 
 
 /**
+ * @summary List hero carousel photos
+ */
+export const GetHeroPhotosResponse = zod.object({
+  "photos": zod.array(zod.object({
+  "id": zod.string(),
+  "url": zod.string(),
+  "alt": zod.string(),
+  "uploaded": zod.boolean()
+}))
+})
+
+
+/**
+ * @summary Finalize an uploaded hero photo
+ */
+export const createHeroPhotoBodyAltMax = 500;
+
+
+
+export const CreateHeroPhotoBody = zod.object({
+  "uploadId": zod.string().uuid(),
+  "alt": zod.string().min(1).max(createHeroPhotoBodyAltMax)
+})
+
+export const CreateHeroPhotoResponse = zod.object({
+  "id": zod.string(),
+  "url": zod.string(),
+  "alt": zod.string(),
+  "uploaded": zod.boolean()
+})
+
+
+/**
+ * @summary Get current user's hero photo administration access
+ */
+export const GetHeroPhotoAdminAccessResponse = zod.object({
+  "signedIn": zod.boolean(),
+  "isAdmin": zod.boolean(),
+  "configured": zod.boolean()
+})
+
+
+/**
+ * @summary Request a signed upload URL for a hero photo
+ */
+export const requestHeroPhotoUploadBodyNameMax = 255;
+
+export const requestHeroPhotoUploadBodySizeMax = 10485760;
+
+
+
+export const RequestHeroPhotoUploadBody = zod.object({
+  "name": zod.string().min(1).max(requestHeroPhotoUploadBodyNameMax),
+  "size": zod.number().int().min(1).max(requestHeroPhotoUploadBodySizeMax),
+  "contentType": zod.enum(['image/jpeg', 'image/png', 'image/webp'])
+})
+
+export const RequestHeroPhotoUploadResponse = zod.object({
+  "uploadURL": zod.string().url(),
+  "uploadId": zod.string(),
+  "objectPath": zod.string()
+})
+
+
+/**
+ * @summary Delete an uploaded hero photo
+ */
+export const DeleteHeroPhotoParams = zod.object({
+  "id": zod.coerce.string().uuid()
+})
+
+export const DeleteHeroPhotoResponse = zod.void()
+
+
+/**
+ * @summary Serve a database-listed normalized hero photo
+ */
+export const GetHeroPhotoImageParams = zod.object({
+  "id": zod.coerce.string().uuid()
+})
+
+export const GetHeroPhotoImageResponse = zod.unknown()
+
+
+/**
  * @summary Register interest in AltoCoronel
  */
 export const createInquiryBodyNameMin = 2;

@@ -21,8 +21,14 @@ import type {
 
 import type {
   HealthStatus,
+  HeroPhotoAdminAccess,
+  HeroPhotoInput,
+  HeroPhotoUpload,
+  HeroPhotoUploadInput,
+  HeroPhotosResponse,
   InquiryInput,
-  InquiryResult
+  InquiryResult,
+  Photo
 } from './api.schemas';
 
 import { customFetch } from '../custom-fetch';
@@ -51,6 +57,487 @@ const withQueryKey = <T extends object, K>(query: T, queryKey: K): T & { queryKe
   }
   return result;
 };
+
+export const getGetHeroPhotosUrl = () => {
+
+
+
+
+  return `/api/hero-photos`
+}
+
+/**
+ * @summary List hero carousel photos
+ */
+export const getHeroPhotos = async ( options?: Parameters<typeof customFetch>[1]): Promise<HeroPhotosResponse> => {
+
+  return customFetch<HeroPhotosResponse>(getGetHeroPhotosUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetHeroPhotosQueryKey = () => {
+    return [
+    `/api/hero-photos`
+    ] as const;
+    }
+
+
+export const getGetHeroPhotosQueryOptions = <TData = Awaited<ReturnType<typeof getHeroPhotos>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getHeroPhotos>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetHeroPhotosQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getHeroPhotos>>> = ({ signal }) => getHeroPhotos({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getHeroPhotos>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetHeroPhotosQueryResult = NonNullable<Awaited<ReturnType<typeof getHeroPhotos>>>
+export type GetHeroPhotosQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary List hero carousel photos
+ */
+
+export function useGetHeroPhotos<TData = Awaited<ReturnType<typeof getHeroPhotos>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getHeroPhotos>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetHeroPhotosQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getCreateHeroPhotoUrl = () => {
+
+
+
+
+  return `/api/hero-photos`
+}
+
+/**
+ * @summary Finalize an uploaded hero photo
+ */
+export const createHeroPhoto = async (heroPhotoInput: HeroPhotoInput, options?: Parameters<typeof customFetch>[1]): Promise<Photo> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<Photo>(getCreateHeroPhotoUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(heroPhotoInput)
+  }
+);}
+
+
+
+
+
+export const getCreateHeroPhotoMutationKey = () => ['createHeroPhoto'] as const;
+
+export const getCreateHeroPhotoMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createHeroPhoto>>, TError,CreateHeroPhotoMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof createHeroPhoto>>, TError,CreateHeroPhotoMutationVariables, TContext> => {
+
+const mutationKey = getCreateHeroPhotoMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createHeroPhoto>>, CreateHeroPhotoMutationVariables> = (props) => {
+          const {data} = props ?? {};
+
+          return  createHeroPhoto(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CreateHeroPhotoMutationResult = NonNullable<Awaited<ReturnType<typeof createHeroPhoto>>>
+    export type CreateHeroPhotoMutationBody = BodyType<HeroPhotoInput>
+    export type CreateHeroPhotoMutationError = ErrorType<unknown>
+    export type CreateHeroPhotoMutationVariables = {data: BodyType<HeroPhotoInput>}
+
+    /**
+ * @summary Finalize an uploaded hero photo
+ */
+export const useCreateHeroPhoto = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createHeroPhoto>>, TError,CreateHeroPhotoMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof createHeroPhoto>>,
+        TError,
+        CreateHeroPhotoMutationVariables,
+        TContext
+      > => {
+      return useMutation(getCreateHeroPhotoMutationOptions(options));
+    }
+
+export const getGetHeroPhotoAdminAccessUrl = () => {
+
+
+
+
+  return `/api/hero-photos/admin-access`
+}
+
+/**
+ * @summary Get current user's hero photo administration access
+ */
+export const getHeroPhotoAdminAccess = async ( options?: Parameters<typeof customFetch>[1]): Promise<HeroPhotoAdminAccess> => {
+
+  return customFetch<HeroPhotoAdminAccess>(getGetHeroPhotoAdminAccessUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetHeroPhotoAdminAccessQueryKey = () => {
+    return [
+    `/api/hero-photos/admin-access`
+    ] as const;
+    }
+
+
+export const getGetHeroPhotoAdminAccessQueryOptions = <TData = Awaited<ReturnType<typeof getHeroPhotoAdminAccess>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getHeroPhotoAdminAccess>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetHeroPhotoAdminAccessQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getHeroPhotoAdminAccess>>> = ({ signal }) => getHeroPhotoAdminAccess({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getHeroPhotoAdminAccess>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetHeroPhotoAdminAccessQueryResult = NonNullable<Awaited<ReturnType<typeof getHeroPhotoAdminAccess>>>
+export type GetHeroPhotoAdminAccessQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary Get current user's hero photo administration access
+ */
+
+export function useGetHeroPhotoAdminAccess<TData = Awaited<ReturnType<typeof getHeroPhotoAdminAccess>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getHeroPhotoAdminAccess>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetHeroPhotoAdminAccessQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getRequestHeroPhotoUploadUrl = () => {
+
+
+
+
+  return `/api/hero-photos/uploads`
+}
+
+/**
+ * @summary Request a signed upload URL for a hero photo
+ */
+export const requestHeroPhotoUpload = async (heroPhotoUploadInput: HeroPhotoUploadInput, options?: Parameters<typeof customFetch>[1]): Promise<HeroPhotoUpload> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<HeroPhotoUpload>(getRequestHeroPhotoUploadUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(heroPhotoUploadInput)
+  }
+);}
+
+
+
+
+
+export const getRequestHeroPhotoUploadMutationKey = () => ['requestHeroPhotoUpload'] as const;
+
+export const getRequestHeroPhotoUploadMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof requestHeroPhotoUpload>>, TError,RequestHeroPhotoUploadMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof requestHeroPhotoUpload>>, TError,RequestHeroPhotoUploadMutationVariables, TContext> => {
+
+const mutationKey = getRequestHeroPhotoUploadMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof requestHeroPhotoUpload>>, RequestHeroPhotoUploadMutationVariables> = (props) => {
+          const {data} = props ?? {};
+
+          return  requestHeroPhotoUpload(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type RequestHeroPhotoUploadMutationResult = NonNullable<Awaited<ReturnType<typeof requestHeroPhotoUpload>>>
+    export type RequestHeroPhotoUploadMutationBody = BodyType<HeroPhotoUploadInput>
+    export type RequestHeroPhotoUploadMutationError = ErrorType<unknown>
+    export type RequestHeroPhotoUploadMutationVariables = {data: BodyType<HeroPhotoUploadInput>}
+
+    /**
+ * @summary Request a signed upload URL for a hero photo
+ */
+export const useRequestHeroPhotoUpload = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof requestHeroPhotoUpload>>, TError,RequestHeroPhotoUploadMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof requestHeroPhotoUpload>>,
+        TError,
+        RequestHeroPhotoUploadMutationVariables,
+        TContext
+      > => {
+      return useMutation(getRequestHeroPhotoUploadMutationOptions(options));
+    }
+
+export const getDeleteHeroPhotoUrl = (id: string,) => {
+
+
+
+
+  return `/api/hero-photos/${id}`
+}
+
+/**
+ * @summary Delete an uploaded hero photo
+ */
+export const deleteHeroPhoto = async (id: string, options?: Parameters<typeof customFetch>[1]): Promise<void> => {
+
+  return customFetch<void>(getDeleteHeroPhotoUrl(id),
+  {
+    ...options,
+    method: 'DELETE'
+
+
+  }
+);}
+
+
+
+
+
+export const getDeleteHeroPhotoMutationKey = () => ['deleteHeroPhoto'] as const;
+
+export const getDeleteHeroPhotoMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteHeroPhoto>>, TError,DeleteHeroPhotoMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof deleteHeroPhoto>>, TError,DeleteHeroPhotoMutationVariables, TContext> => {
+
+const mutationKey = getDeleteHeroPhotoMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteHeroPhoto>>, DeleteHeroPhotoMutationVariables> = (props) => {
+          const {id} = props ?? {};
+
+          return  deleteHeroPhoto(id,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DeleteHeroPhotoMutationResult = NonNullable<Awaited<ReturnType<typeof deleteHeroPhoto>>>
+
+    export type DeleteHeroPhotoMutationError = ErrorType<unknown>
+    export type DeleteHeroPhotoMutationVariables = {id: string}
+
+    /**
+ * @summary Delete an uploaded hero photo
+ */
+export const useDeleteHeroPhoto = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteHeroPhoto>>, TError,DeleteHeroPhotoMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof deleteHeroPhoto>>,
+        TError,
+        DeleteHeroPhotoMutationVariables,
+        TContext
+      > => {
+      return useMutation(getDeleteHeroPhotoMutationOptions(options));
+    }
+
+export const getGetHeroPhotoImageUrl = (id: string,) => {
+
+
+
+
+  return `/api/hero-photos/${id}/image`
+}
+
+/**
+ * @summary Serve a database-listed normalized hero photo
+ */
+export const getHeroPhotoImage = async (id: string, options?: Parameters<typeof customFetch>[1]): Promise<Blob> => {
+
+  return customFetch<Blob>(getGetHeroPhotoImageUrl(id),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetHeroPhotoImageQueryKey = (id: string,) => {
+    return [
+    `/api/hero-photos/${id}/image`
+    ] as const;
+    }
+
+
+export const getGetHeroPhotoImageQueryOptions = <TData = Awaited<ReturnType<typeof getHeroPhotoImage>>, TError = ErrorType<unknown>>(id: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getHeroPhotoImage>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetHeroPhotoImageQueryKey(id);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getHeroPhotoImage>>> = ({ signal }) => getHeroPhotoImage(id, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, enabled: id !== null && id !== undefined, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getHeroPhotoImage>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetHeroPhotoImageQueryResult = NonNullable<Awaited<ReturnType<typeof getHeroPhotoImage>>>
+export type GetHeroPhotoImageQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary Serve a database-listed normalized hero photo
+ */
+
+export function useGetHeroPhotoImage<TData = Awaited<ReturnType<typeof getHeroPhotoImage>>, TError = ErrorType<unknown>>(
+ id: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getHeroPhotoImage>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetHeroPhotoImageQueryOptions(id,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
 
 export const getCreateInquiryUrl = () => {
 

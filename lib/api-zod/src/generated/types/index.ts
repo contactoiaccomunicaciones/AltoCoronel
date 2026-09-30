@@ -7,6 +7,13 @@
  */
 
 export * from './healthStatus';
+export * from './heroPhotoAdminAccess';
+export * from './heroPhotoInput';
+export * from './heroPhotosResponse';
+export * from './heroPhotoUpload';
+export * from './heroPhotoUploadInput';
+export * from './heroPhotoUploadInputContentType';
 export * from './inquiryInput';
 export * from './inquiryInputChannel';
 export * from './inquiryResult';
+export * from './photo';
