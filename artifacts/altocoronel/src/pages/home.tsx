@@ -236,9 +236,6 @@ function Vivir() {
           <Reveal delay={0.3} className="overflow-hidden rounded-sm bg-white md:col-span-3">
             <img src={IMG("plano-conjunto-mejorado.png")}
               alt="Plano general de distribución del condominio AltoCoronel" className="block h-auto w-full" data-testid="img-collage-wide" />
-            <span className="absolute right-3 top-3 rounded-sm bg-secondary/95 px-3 py-2 font-display text-sm font-medium text-secondary-foreground shadow-sm md:text-base" data-testid="banner-condominio">
-              condominio
-            </span>
           </Reveal>
         </div>
         <Reveal delay={0.35}>
