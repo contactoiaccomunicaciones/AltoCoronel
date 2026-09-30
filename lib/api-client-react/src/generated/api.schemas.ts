@@ -5,6 +5,61 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
+export interface Photo {
+  id: string;
+  url: string;
+  alt: string;
+  uploaded: boolean;
+}
+
+export interface HeroPhotosResponse {
+  photos: Photo[];
+}
+
+export interface HeroPhotoAdminAccess {
+  signedIn: boolean;
+  isAdmin: boolean;
+  configured: boolean;
+}
+
+export type HeroPhotoUploadInputContentType = typeof HeroPhotoUploadInputContentType[keyof typeof HeroPhotoUploadInputContentType];
+
+
+export const HeroPhotoUploadInputContentType = {
+  'image/jpeg': 'image/jpeg',
+  'image/png': 'image/png',
+  'image/webp': 'image/webp',
+} as const;
+
+export interface HeroPhotoUploadInput {
+  /**
+     * @minLength 1
+     * @maxLength 255
+     */
+  name: string;
+  /**
+     * @minimum 1
+     * @maximum 10485760
+     */
+  size: number;
+  contentType: HeroPhotoUploadInputContentType;
+}
+
+export interface HeroPhotoUpload {
+  uploadURL: string;
+  uploadId: string;
+  objectPath: string;
+}
+
+export interface HeroPhotoInput {
+  uploadId: string;
+  /**
+     * @minLength 1
+     * @maxLength 500
+     */
+  alt: string;
+}
+
 export type InquiryInputChannel = typeof InquiryInputChannel[keyof typeof InquiryInputChannel];
 
 

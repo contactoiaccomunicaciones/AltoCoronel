@@ -10,7 +10,97 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: hero-photos
+    description: AltoCoronel hero carousel photos
 paths:
+  /hero-photos:
+    get:
+      operationId: getHeroPhotos
+      tags: [hero-photos]
+      summary: List hero carousel photos
+      responses:
+        "200":
+          description: Hero photos in display order
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HeroPhotosResponse"
+    post:
+      operationId: createHeroPhoto
+      tags: [hero-photos]
+      summary: Finalize an uploaded hero photo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HeroPhotoInput"
+      responses:
+        "201":
+          description: Hero photo created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Photo"
+  /hero-photos/admin-access:
+    get:
+      operationId: getHeroPhotoAdminAccess
+      tags: [hero-photos]
+      summary: Get current user's hero photo administration access
+      responses:
+        "200":
+          description: Admin access state
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HeroPhotoAdminAccess"
+  /hero-photos/uploads:
+    post:
+      operationId: requestHeroPhotoUpload
+      tags: [hero-photos]
+      summary: Request a signed upload URL for a hero photo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HeroPhotoUploadInput"
+      responses:
+        "200":
+          description: Signed direct-upload details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HeroPhotoUpload"
+  /hero-photos/{id}:
+    delete:
+      operationId: deleteHeroPhoto
+      tags: [hero-photos]
+      summary: Delete an uploaded hero photo
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "204":
+          description: Photo deleted
+  /hero-photos/{id}/image:
+    get:
+      operationId: getHeroPhotoImage
+      tags: [hero-photos]
+      summary: Serve a database-listed normalized hero photo
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          description: Normalized JPEG image
+          content:
+            image/jpeg:
+              schema: { type: string, format: binary }
   /inquiries:
     post:
       operationId: createInquiry
@@ -43,6 +133,48 @@ paths:
                 $ref: "#/components/schemas/HealthStatus"
 components:
   schemas:
+    Photo:
+      type: object
+      required: [id, url, alt, uploaded]
+      properties:
+        id: { type: string }
+        url: { type: string }
+        alt: { type: string }
+        uploaded: { type: boolean }
+    HeroPhotosResponse:
+      type: object
+      required: [photos]
+      properties:
+        photos:
+          type: array
+          items: { $ref: "#/components/schemas/Photo" }
+    HeroPhotoAdminAccess:
+      type: object
+      required: [signedIn, isAdmin, configured]
+      properties:
+        signedIn: { type: boolean }
+        isAdmin: { type: boolean }
+        configured: { type: boolean }
+    HeroPhotoUploadInput:
+      type: object
+      required: [name, size, contentType]
+      properties:
+        name: { type: string, minLength: 1, maxLength: 255 }
+        size: { type: integer, minimum: 1, maximum: 10485760 }
+        contentType: { type: string, enum: [image/jpeg, image/png, image/webp] }
+    HeroPhotoUpload:
+      type: object
+      required: [uploadURL, uploadId, objectPath]
+      properties:
+        uploadURL: { type: string, format: uri }
+        uploadId: { type: string }
+        objectPath: { type: string }
+    HeroPhotoInput:
+      type: object
+      required: [uploadId, alt]
+      properties:
+        uploadId: { type: string, format: uuid }
+        alt: { type: string, minLength: 1, maxLength: 500 }
     InquiryInput:
       type: object
       required: [name, email, phone, channel, consent]

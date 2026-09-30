@@ -10,6 +10,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Checkbox } from "@/components/ui/checkbox";
 import { CONTACT, instagramReady, whatsappReady, emailReady, whatsappLink, instagramHandle } from "@/config/contact";
+import { HeroCarousel } from "@/components/hero-carousel";
 
 const IMG = (n: string) => `${import.meta.env.BASE_URL}images/${n}`;
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -17,6 +18,7 @@ const ease = [0.22, 1, 0.36, 1] as const;
 const NAV = [
   { id: "proyecto", label: "Proyecto" },
   { id: "modelos", label: "Modelos y Plantas" },
+  { id: "interiores", label: "Interiores" },
   { id: "ubicacion", label: "Ubicación y Entorno" },
   { id: "contacto", label: "Contacto" },
 ];
@@ -91,7 +93,7 @@ function Nav() {
           <img src={`${import.meta.env.BASE_URL}images/miro-logo.png`} alt="Miró Inmobiliaria" className="h-14 w-14 self-center rounded-sm object-contain bg-white mr-2" />
           <span className="self-center text-lg sm:text-xl">Alto<span className="text-primary">Coronel</span></span>
         </a>
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-8 lg:flex">
           {NAV.map((n) => (
             <a key={n.id} href={`#${n.id}`} data-testid={`link-nav-${n.id}`}
               className={`group relative text-sm transition-colors ${solid ? "text-foreground/80 hover:text-foreground" : "text-[hsl(40_45%_96%/0.85)] hover:text-[hsl(40_45%_96%)]"}`}>
@@ -102,7 +104,7 @@ function Nav() {
         </nav>
         <div className="flex items-center gap-2">
           <button onClick={() => setOpen(!open)} aria-label="Abrir menú" data-testid="button-menu"
-            className={`flex h-10 w-10 items-center justify-center md:hidden ${solid ? "text-foreground" : "text-[hsl(40_45%_96%)]"}`}>
+            className={`flex h-10 w-10 items-center justify-center lg:hidden ${solid ? "text-foreground" : "text-[hsl(40_45%_96%)]"}`}>
             {open ? <X /> : <Menu />}
           </button>
         </div>
@@ -110,7 +112,7 @@ function Nav() {
       <AnimatePresence>
         {open && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-x-0 top-16 bottom-0 flex flex-col bg-background px-6 pt-8 md:hidden">
+            className="fixed inset-x-0 top-16 bottom-0 flex flex-col overflow-y-auto bg-background px-6 pt-8 md:top-20 lg:hidden">
             {NAV.map((n, i) => (
               <motion.a key={n.id} href={`#${n.id}`} onClick={() => setOpen(false)} data-testid={`link-mobile-${n.id}`}
                 initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.05 * i, ease }}
@@ -132,8 +134,7 @@ function Hero() {
   const scale = useTransform(scrollYProgress, [0, 1], [1.05, 1.15]);
   return (
     <section id="inicio" ref={ref} className="relative min-h-[100dvh] overflow-hidden bg-secondary">
-      <motion.img src={IMG("hero-alto-coronel.jpg")} alt="Viviendas de AltoCoronel en Coronel" style={{ y, scale, filter: "brightness(1.08)" }}
-        className="absolute inset-0 h-full w-full object-cover object-top" data-testid="img-hero" />
+      <HeroCarousel style={{ y, scale, filter: "brightness(1.08)" }} />
       <div className="absolute inset-0 bg-gradient-to-t from-[hsl(200_30%_6%/0.92)] via-[hsl(200_30%_8%/0.55)] to-[hsl(200_30%_10%/0.15)]" />
       <div className="absolute inset-x-0 bottom-0 h-[55%] bg-gradient-to-t from-[hsl(200_30%_4%/0.65)] to-transparent" />
       <div className="relative mx-auto flex min-h-[100dvh] max-w-7xl flex-col justify-end px-5 pb-12 md:px-10 md:pb-16">
@@ -250,12 +251,47 @@ function Vivir() {
   );
 }
 
+function Interiores() {
+  return (
+    <section id="interiores" className="scroll-mt-20 bg-card py-24 md:py-36">
+      <div className="mx-auto max-w-7xl px-5 md:px-10">
+        <Reveal><Eyebrow n="03">Interiores</Eyebrow></Reveal>
+        <div className="mt-10 grid items-center gap-10 md:grid-cols-12 md:gap-12">
+          <Reveal className="md:col-span-4">
+            <h2 className="font-display text-4xl font-light leading-[1.05] md:text-6xl">
+              Un lugar para <em className="text-primary">estar juntos.</em>
+            </h2>
+            <p className="mt-8 max-w-sm text-lg leading-relaxed text-muted-foreground">
+              Conversar, compartir y hacer espacio para los momentos de todos los días. Imagina tu vida en familia en AltoCoronel.
+            </p>
+            <p className="mt-6 max-w-sm border-l-2 border-primary pl-4 text-sm leading-relaxed text-muted-foreground">
+              Esta imagen es referencial. No representa una casa ni las terminaciones del proyecto.
+            </p>
+          </Reveal>
+          <Reveal delay={0.15} className="relative md:col-span-8">
+            <div className="relative overflow-hidden rounded-sm bg-muted">
+              <img
+                src={IMG("interior.jpg")}
+                alt="Sala de estar y comedor amoblados, imagen referencial que no corresponde a una casa de AltoCoronel"
+                className="block aspect-[4/3] w-full object-cover md:aspect-[3/2]"
+                loading="lazy"
+                data-testid="img-interiores"
+              />
+              <RefTag className="bottom-4 right-4" />
+            </div>
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Coronel() {
   return (
     <section id="ubicacion" className="relative overflow-hidden py-24 md:py-36">
       <div className="mx-auto grid max-w-7xl gap-14 px-5 md:grid-cols-12 md:px-10">
         <div className="md:col-span-5">
-          <Reveal><Eyebrow n="03">Ubicación y Entorno</Eyebrow></Reveal>
+          <Reveal><Eyebrow n="04">Ubicación y Entorno</Eyebrow></Reveal>
           <Reveal delay={0.1}>
             <h2 className="mt-8 font-display text-6xl font-light leading-none md:text-8xl">Coronel<span className="text-primary">.</span></h2>
           </Reveal>
@@ -327,7 +363,7 @@ function Contacto({ onPending, onPrivacy }: { onPending: (k: Pending) => void; o
     <section id="contacto" className="relative bg-background py-24 md:py-36">
       <div className="mx-auto grid max-w-7xl gap-16 px-5 md:grid-cols-12 md:px-10">
         <div className="md:col-span-5">
-          <Reveal><Eyebrow n="04">Contacto</Eyebrow></Reveal>
+          <Reveal><Eyebrow n="05">Contacto</Eyebrow></Reveal>
           <Reveal delay={0.1}>
             <h2 className="mt-8 font-display text-5xl font-light leading-[1] md:text-7xl">
               Conversemos sobre <em className="text-primary">tu próxima casa.</em>
@@ -472,6 +508,7 @@ function Footer({ onPending, onPrivacy }: { onPending: (k: Pending) => void; onP
           <div><div className="text-[hsl(40_45%_95%/0.5)]">Proyecto</div><div className="mt-2">51 casas en condominio · Desde 2.850 UF</div></div>
           <div className="flex flex-col items-start gap-2">
             <div className="text-[hsl(40_45%_95%/0.5)]">Canales</div>
+            <a href={`${import.meta.env.BASE_URL}administrar-fotos`} className="hover:text-accent" data-testid="link-admin-photos">Administrar fotos</a>
             <button onClick={() => (instagramReady ? window.open(CONTACT.instagramUrl, "_blank", "noopener,noreferrer") : onPending("instagram"))} className="flex items-center gap-2 hover:text-accent" data-testid="button-footer-instagram"><SiInstagram /> Instagram</button>
             <button onClick={() => (whatsappReady ? window.open(whatsappLink(), "_blank", "noopener,noreferrer") : onPending("whatsapp"))} className="flex items-center gap-2 hover:text-accent" data-testid="button-footer-whatsapp"><SiWhatsapp /> WhatsApp</button>
           </div>
@@ -498,6 +535,7 @@ export default function Home() {
         <Hero />
         <Proyecto />
         <Vivir />
+        <Interiores />
         <Coronel />
         <Contacto onPending={setPending} onPrivacy={() => setPrivacy(true)} />
       </main>
