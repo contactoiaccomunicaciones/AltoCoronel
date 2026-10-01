@@ -11,6 +11,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Checkbox } from "@/components/ui/checkbox";
 import { CONTACT, instagramReady, whatsappReady, emailReady, whatsappLink, instagramHandle } from "@/config/contact";
 import { HeroCarousel } from "@/components/hero-carousel";
+import { InteriorPhotoCollage } from "@/components/interior-photo-collage";
 
 const IMG = (n: string) => `${import.meta.env.BASE_URL}images/${n}`;
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -29,14 +30,6 @@ function Reveal({ children, delay = 0, className = "" }: { children: ReactNode; 
       viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.9, delay, ease }}>
       {children}
     </motion.div>
-  );
-}
-
-function RefTag({ className = "" }: { className?: string }) {
-  return (
-    <span className={`absolute z-10 rounded-sm bg-[hsl(200_30%_13%/0.72)] px-2 py-1 text-[10px] uppercase tracking-[0.18em] text-[hsl(40_45%_95%)] backdrop-blur ${className}`}>
-      Imagen referencial
-    </span>
   );
 }
 
@@ -263,16 +256,7 @@ function Interiores() {
             </p>
           </Reveal>
           <Reveal delay={0.15} className="relative md:col-span-8">
-            <div className="relative overflow-hidden rounded-sm bg-muted">
-              <img
-                src={IMG("interior.jpg")}
-                alt="Sala de estar y comedor amoblados, imagen referencial que no corresponde a una casa de AltoCoronel"
-                className="block aspect-[4/3] w-full object-cover md:aspect-[3/2]"
-                loading="lazy"
-                data-testid="img-interiores"
-              />
-              <RefTag className="bottom-4 right-4" />
-            </div>
+            <InteriorPhotoCollage />
           </Reveal>
         </div>
       </div>
