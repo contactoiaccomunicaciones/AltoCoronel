@@ -5,21 +5,17 @@ import {
   getNormalizedHeroPhotoObjectLocation,
   isValidHeroPhotoUploadMetadata,
   isValidPendingHeroObjectPath,
-  isVerifiedPhotoAdmin,
+  isValidPhotoAdminToken,
   MAX_HERO_PHOTO_BYTES,
 } from "../src/lib/heroPhotoPolicy.ts";
 
-const adminEmail = {
-  emailAddress: "Admin@Example.com",
-  verified: true,
-};
 const uploadId = "b8f7c20a-2ed4-4d28-966d-28a188630df0";
 
-test("photo administrator requires the configured, verified primary email", () => {
-  assert.equal(isVerifiedPhotoAdmin(adminEmail, "admin@example.COM"), true);
-  assert.equal(isVerifiedPhotoAdmin({ ...adminEmail, verified: false }, "admin@example.com"), false);
-  assert.equal(isVerifiedPhotoAdmin({ ...adminEmail, emailAddress: "other@example.com" }, "admin@example.com"), false);
-  assert.equal(isVerifiedPhotoAdmin(adminEmail, undefined), false);
+test("photo administration token matches only the configured secret", () => {
+  assert.equal(isValidPhotoAdminToken("shared-secret", "shared-secret"), true);
+  assert.equal(isValidPhotoAdminToken("wrong-secret", "shared-secret"), false);
+  assert.equal(isValidPhotoAdminToken("", "shared-secret"), false);
+  assert.equal(isValidPhotoAdminToken("shared-secret", undefined), false);
 });
 
 test("upload metadata accepts only supported formats and the 10 MB limit", () => {
@@ -31,15 +27,15 @@ test("upload metadata accepts only supported formats and the 10 MB limit", () =>
 
 test("finalization is bound to its owner and the pending-upload age window", () => {
   const now = Date.now();
-  const pending = { uploadedBy: "clerk-user-1", createdAt: new Date(now - 1_000) };
-  assert.equal(canFinalizeHeroPhotoUpload(pending, "clerk-user-1", now, 30_000), true);
-  assert.equal(canFinalizeHeroPhotoUpload(pending, "clerk-user-2", now, 30_000), false);
+  const pending = { uploadedBy: "shared-photo-admin", createdAt: new Date(now - 1_000) };
+  assert.equal(canFinalizeHeroPhotoUpload(pending, "shared-photo-admin", now, 30_000), true);
+  assert.equal(canFinalizeHeroPhotoUpload(pending, "other-admin", now, 30_000), false);
   assert.equal(
-    canFinalizeHeroPhotoUpload({ ...pending, createdAt: new Date(now - 31_000) }, "clerk-user-1", now, 30_000),
+    canFinalizeHeroPhotoUpload({ ...pending, createdAt: new Date(now - 31_000) }, "shared-photo-admin", now, 30_000),
     false,
   );
   assert.equal(
-    canFinalizeHeroPhotoUpload({ ...pending, createdAt: new Date(now + 1) }, "clerk-user-1", now, 30_000),
+    canFinalizeHeroPhotoUpload({ ...pending, createdAt: new Date(now + 1) }, "shared-photo-admin", now, 30_000),
     false,
   );
 });

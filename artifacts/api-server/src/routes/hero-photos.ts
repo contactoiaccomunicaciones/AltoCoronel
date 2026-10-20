@@ -1,6 +1,5 @@
 import { randomUUID } from "node:crypto";
 import { and, asc, count, eq, lt, sql } from "drizzle-orm";
-import { clerkClient, getAuth } from "@clerk/express";
 import type { File } from "@google-cloud/storage";
 import sharp from "sharp";
 import { Router, type IRouter, type Request, type Response } from "express";
@@ -25,9 +24,10 @@ import {
   canFinalizeHeroPhotoUpload,
   getNormalizedHeroPhotoObjectLocation,
   isValidHeroPhotoUploadMetadata,
+  isValidPhotoAdminToken,
   isValidPendingHeroObjectPath,
-  isVerifiedPhotoAdmin,
   MAX_HERO_PHOTO_BYTES,
+  PHOTO_ADMIN_ID,
 } from "../lib/heroPhotoPolicy";
 
 const router: IRouter = Router();
@@ -59,40 +59,26 @@ const defaultPhotos = [
   },
 ] as const;
 
-function configuredAdminEmail(): string | null {
-  const email = process.env.PHOTO_ADMIN_EMAIL?.trim();
-  return email ? email.toLowerCase() : null;
+function configuredAdminToken(): string | null {
+  const token = process.env.PHOTO_ADMIN_TOKEN?.trim();
+  return token || null;
 }
 
-async function resolveAdminAccess(req: Request): Promise<{
-  signedIn: boolean;
-  isAdmin: boolean;
-  configured: boolean;
-  userId: string | null;
-}> {
-  const userId = getAuth(req).userId ?? null;
-  const adminEmail = configuredAdminEmail();
-  if (!userId || !adminEmail) {
-    return {
-      signedIn: Boolean(userId),
-      isAdmin: false,
-      configured: Boolean(adminEmail),
-      userId,
-    };
-  }
+function presentedAdminToken(req: Request): string | null {
+  const authorization = req.get("authorization");
+  const match = authorization?.match(/^Bearer\s+(.+)$/i);
+  return match?.[1] ?? null;
+}
 
-  const user = await clerkClient.users.getUser(userId);
-  const primaryEmail = user.primaryEmailAddress;
-  const isAdmin = isVerifiedPhotoAdmin(
-    primaryEmail
-      ? {
-          emailAddress: primaryEmail.emailAddress,
-          verified: primaryEmail.verification?.status === "verified",
-        }
-      : null,
-    adminEmail,
-  );
-  return { signedIn: true, isAdmin, configured: true, userId };
+function resolveAdminAccess(req: Request): {
+  authorized: boolean;
+  configured: boolean;
+} {
+  const configuredToken = configuredAdminToken();
+  return {
+    authorized: isValidPhotoAdminToken(presentedAdminToken(req), configuredToken),
+    configured: configuredToken !== null,
+  };
 }
 
 function isSameOrigin(req: Request): boolean {
@@ -112,32 +98,20 @@ function isSameOrigin(req: Request): boolean {
   }
 }
 
-async function requireAdmin(
+function requireAdmin(
   req: Request,
   res: Response,
-): Promise<string | null> {
-  let access: Awaited<ReturnType<typeof resolveAdminAccess>>;
-  try {
-    access = await resolveAdminAccess(req);
-  } catch (error) {
-    req.log.error({ err: error }, "Unable to verify hero photo administrator");
-    res.status(503).json({ error: "No se pudo verificar el acceso de administración." });
-    return null;
-  }
-
-  if (!access.signedIn) {
-    res.status(401).json({ error: "Debes iniciar sesión para administrar las fotos." });
-    return null;
-  }
+): string | null {
+  const access = resolveAdminAccess(req);
   if (!access.configured) {
-    res.status(403).json({ error: "La administración de fotos no está configurada." });
+    res.status(503).json({ error: "La administración de fotos no está configurada." });
     return null;
   }
-  if (!access.isAdmin || !access.userId) {
-    res.status(403).json({ error: "No tienes permiso para administrar las fotos." });
+  if (!access.authorized) {
+    res.status(401).json({ error: "La clave de administración no es válida." });
     return null;
   }
-  return access.userId;
+  return PHOTO_ADMIN_ID;
 }
 
 async function uploadedPhotoCount(): Promise<number> {
@@ -171,19 +145,7 @@ router.get("/hero-photos", async (req, res): Promise<void> => {
 });
 
 router.get("/hero-photos/admin-access", async (req, res): Promise<void> => {
-  try {
-    const access = await resolveAdminAccess(req);
-    res.json(
-      GetHeroPhotoAdminAccessResponse.parse({
-        signedIn: access.signedIn,
-        isAdmin: access.isAdmin,
-        configured: access.configured,
-      }),
-    );
-  } catch (error) {
-    req.log.error({ err: error }, "Unable to resolve hero photo admin access");
-    res.status(503).json({ error: "No se pudo verificar el acceso de administración." });
-  }
+  res.json(GetHeroPhotoAdminAccessResponse.parse(resolveAdminAccess(req)));
 });
 
 router.post("/hero-photos/uploads", async (req, res): Promise<void> => {
@@ -191,7 +153,7 @@ router.post("/hero-photos/uploads", async (req, res): Promise<void> => {
     res.status(403).json({ error: "La solicitud debe provenir de este sitio." });
     return;
   }
-  const userId = await requireAdmin(req, res);
+  const userId = requireAdmin(req, res);
   if (!userId) return;
 
   const parsed = RequestHeroPhotoUploadBody.safeParse(req.body);
@@ -247,7 +209,7 @@ router.post("/hero-photos", async (req, res): Promise<void> => {
     res.status(403).json({ error: "La solicitud debe provenir de este sitio." });
     return;
   }
-  const userId = await requireAdmin(req, res);
+  const userId = requireAdmin(req, res);
   if (!userId) return;
 
   const parsed = CreateHeroPhotoBody.safeParse(req.body);
@@ -444,7 +406,7 @@ router.delete("/hero-photos/:id", async (req, res): Promise<void> => {
     res.status(403).json({ error: "La solicitud debe provenir de este sitio." });
     return;
   }
-  const userId = await requireAdmin(req, res);
+  const userId = requireAdmin(req, res);
   if (!userId) return;
 
   const params = DeleteHeroPhotoParams.safeParse(req.params);

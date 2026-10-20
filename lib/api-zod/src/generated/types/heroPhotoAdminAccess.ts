@@ -7,7 +7,6 @@
  */
 
 export interface HeroPhotoAdminAccess {
-  signedIn: boolean;
-  isAdmin: boolean;
+  authorized: boolean;
   configured: boolean;
 }

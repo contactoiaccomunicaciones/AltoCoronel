@@ -1,2 +1,3 @@
 - [Mobile photo orientation](mobile-photo-orientation.md) — Normalize EXIF orientation before editing or using iPhone photos as web assets.
 - [Vite dependency cache](vite-dependency-cache.md) — Catalog upgrades may leave old runtime prebundles even when installed package versions match.
+- [PostgreSQL TLS](postgresql-tls.md) — The app's PostgreSQL endpoint requires TLS; preserve TLS in the shared connection pool.

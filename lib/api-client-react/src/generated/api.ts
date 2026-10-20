@@ -232,7 +232,7 @@ export const getGetHeroPhotoAdminAccessUrl = () => {
 }
 
 /**
- * @summary Get current user's hero photo administration access
+ * @summary Check access to hero photo administration
  */
 export const getHeroPhotoAdminAccess = async ( options?: Parameters<typeof customFetch>[1]): Promise<HeroPhotoAdminAccess> => {
 
@@ -279,7 +279,7 @@ export type GetHeroPhotoAdminAccessQueryError = ErrorType<unknown>
 
 
 /**
- * @summary Get current user's hero photo administration access
+ * @summary Check access to hero photo administration
  */
 
 export function useGetHeroPhotoAdminAccess<TData = Awaited<ReturnType<typeof getHeroPhotoAdminAccess>>, TError = ErrorType<unknown>>(

@@ -42,11 +42,10 @@ export const CreateHeroPhotoResponse = zod.object({
 
 
 /**
- * @summary Get current user's hero photo administration access
+ * @summary Check access to hero photo administration
  */
 export const GetHeroPhotoAdminAccessResponse = zod.object({
-  "signedIn": zod.boolean(),
-  "isAdmin": zod.boolean(),
+  "authorized": zod.boolean(),
   "configured": zod.boolean()
 })
 
