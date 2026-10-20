@@ -46,7 +46,7 @@ paths:
     get:
       operationId: getHeroPhotoAdminAccess
       tags: [hero-photos]
-      summary: Get current user's hero photo administration access
+      summary: Check access to hero photo administration
       responses:
         "200":
           description: Admin access state
@@ -150,10 +150,9 @@ components:
           items: { $ref: "#/components/schemas/Photo" }
     HeroPhotoAdminAccess:
       type: object
-      required: [signedIn, isAdmin, configured]
+      required: [authorized, configured]
       properties:
-        signedIn: { type: boolean }
-        isAdmin: { type: boolean }
+        authorized: { type: boolean }
         configured: { type: boolean }
     HeroPhotoUploadInput:
       type: object

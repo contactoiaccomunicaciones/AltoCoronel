@@ -1,4 +1,7 @@
+import { timingSafeEqual } from "node:crypto";
+
 export const MAX_HERO_PHOTO_BYTES = 10 * 1024 * 1024;
+export const PHOTO_ADMIN_ID = "shared-photo-admin";
 export const ALLOWED_HERO_PHOTO_CONTENT_TYPES = [
   "image/jpeg",
   "image/png",
@@ -10,16 +13,14 @@ const UUID_PATTERN =
 const PENDING_OBJECT_PATH_PATTERN =
   /^\/objects\/uploads\/[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
-export function isVerifiedPhotoAdmin(
-  primaryEmail: { emailAddress: string; verified: boolean } | null | undefined,
-  configuredEmail: string | null | undefined,
+export function isValidPhotoAdminToken(
+  providedToken: string | null | undefined,
+  configuredToken: string | null | undefined,
 ): boolean {
-  const normalizedConfiguredEmail = configuredEmail?.trim().toLowerCase();
-  return Boolean(
-    normalizedConfiguredEmail &&
-      primaryEmail?.verified &&
-      primaryEmail.emailAddress.trim().toLowerCase() === normalizedConfiguredEmail,
-  );
+  if (!providedToken || !configuredToken) return false;
+  const provided = Buffer.from(providedToken);
+  const configured = Buffer.from(configuredToken);
+  return provided.length === configured.length && timingSafeEqual(provided, configured);
 }
 
 export function isValidHeroPhotoUploadMetadata(input: {
